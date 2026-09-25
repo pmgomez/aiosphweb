@@ -7,7 +7,7 @@
 <meta name="description" content="AI Olympiad Society Philippines is a non-stock, non-profit organization that runs national AI competitions and fields Philippine delegations to the International Olympiad in Artificial Intelligence.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
     --blue: #0038A8;
@@ -16,6 +16,8 @@
     --ink: #14213D;
     --muted: #4A5670;
     --paper: #FFFFFF;
+    --font-sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
   }
   @media (prefers-color-scheme: dark) {
     :root {
@@ -34,7 +36,7 @@
     flex-direction: column;
     background: var(--paper);
     color: var(--ink);
-    font-family: "Bricolage Grotesque", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-family: var(--font-sans);
     font-size: 1.0625rem;
     line-height: 1.6;
   }
@@ -54,6 +56,16 @@
     border-radius: 50%;
     background: var(--sun);
     margin-bottom: 1.75rem;
+    animation: pulse 3.5s ease-in-out infinite;
+    transition: transform 0.2s ease-out;
+    will-change: transform;
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(252, 209, 22, 0.45); }
+    50% { box-shadow: 0 0 0 10px rgba(252, 209, 22, 0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .sun { animation: none; transition: none; }
   }
   h1 {
     margin: 0 0 1.5rem;
@@ -63,7 +75,7 @@
     letter-spacing: -0.02em;
   }
   .purpose { margin: 0 0 1.25rem; max-width: 65ch; }
-  .nonprofit { margin: 0 0 2.5rem; color: var(--muted); font-size: 0.95rem; }
+  .nonprofit { margin: 0 0 2.5rem; color: var(--muted); font-size: 0.85rem; font-family: var(--font-mono); }
   .links { display: grid; gap: 0.75rem; margin: 0; padding: 0; list-style: none; }
   .links a {
     color: var(--blue);
@@ -74,13 +86,14 @@
   }
   .links a:hover { text-decoration-color: var(--red); }
   a:focus-visible { outline: 3px solid var(--sun); outline-offset: 3px; border-radius: 2px; }
-  .links small { display: block; color: var(--muted); font-size: 0.9rem; }
+  .links small { display: block; color: var(--muted); font-size: 0.85rem; font-family: var(--font-mono); }
   footer {
     max-width: 44rem; width: 100%;
     margin: 0 auto;
     padding: 1.5rem;
     color: var(--muted);
-    font-size: 0.875rem;
+    font-size: 0.8rem;
+    font-family: var(--font-mono);
   }
 </style>
 </head>
@@ -97,5 +110,16 @@
     </ul>
   </main>
   <footer>&copy; 2026 AI Olympiad Society Philippines, Inc.</footer>
+  <script>
+    var sun = document.querySelector('.sun');
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (sun && !reduceMotion && matchMedia('(hover: hover)').matches) {
+      document.addEventListener('mousemove', function (e) {
+        var x = (e.clientX / window.innerWidth - 0.5) * 12;
+        var y = (e.clientY / window.innerHeight - 0.5) * 12;
+        sun.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
+      });
+    }
+  </script>
 </body>
 </html>
