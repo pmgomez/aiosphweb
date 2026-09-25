@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Olympiad Society Philippines, Inc.</title>
+<meta name="description" content="AI Olympiad Society Philippines is a non-stock, non-profit organization that runs national AI competitions and fields Philippine delegations to the International Olympiad in Artificial Intelligence.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #0038A8;
+    --red: #CE1126;
+    --sun: #FCD116;
+    --ink: #14213D;
+    --muted: #4A5670;
+    --paper: #FFFFFF;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --blue: #7FA6FF;
+      --ink: #EEF2FA;
+      --muted: #AEB8CC;
+      --paper: #0E1830;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Bricolage Grotesque", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+  }
+  .flag { display: flex; height: 6px; }
+  .flag span { flex: 1; }
+  .flag span:nth-child(1) { background: var(--blue); }
+  .flag span:nth-child(2) { background: var(--red); }
+  main {
+    flex: 1;
+    width: 100%;
+    max-width: 44rem;
+    margin: 0 auto;
+    padding: clamp(3rem, 10vw, 7rem) 1.5rem 3rem;
+  }
+  .sun {
+    width: 2.25rem; height: 2.25rem;
+    border-radius: 50%;
+    background: var(--sun);
+    margin-bottom: 1.75rem;
+  }
+  h1 {
+    margin: 0 0 1.5rem;
+    font-size: clamp(2.5rem, 8vw, 4.25rem);
+    font-weight: 800;
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+  }
+  .purpose { margin: 0 0 1.25rem; max-width: 65ch; }
+  .nonprofit { margin: 0 0 2.5rem; color: var(--muted); font-size: 0.95rem; }
+  .links { display: grid; gap: 0.75rem; margin: 0; padding: 0; list-style: none; }
+  .links a {
+    color: var(--blue);
+    font-weight: 600;
+    font-size: 1.2rem;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+  .links a:hover { text-decoration-color: var(--red); }
+  a:focus-visible { outline: 3px solid var(--sun); outline-offset: 3px; border-radius: 2px; }
+  .links small { display: block; color: var(--muted); font-size: 0.9rem; }
+  footer {
+    max-width: 44rem; width: 100%;
+    margin: 0 auto;
+    padding: 1.5rem;
+    color: var(--muted);
+    font-size: 0.875rem;
+  }
+</style>
+</head>
+<body>
+  <div class="flag" aria-hidden="true"><span></span><span></span></div>
+  <main>
+    <div class="sun" aria-hidden="true"></div>
+    <h1>AI Olympiad Society Philippines, Inc.</h1>
+    <p class="purpose">We organize national competitive programming, data science, and artificial intelligence competitions, selection trials, and educational programs. We select, train, mentor, and field official Philippine student delegations to international AI competitions, including the International Olympiad in Artificial Intelligence (IOAI) and the Asia-Pacific Olympiad in Artificial Intelligence (APOAI). We advance youth education, research, and public capability in computer science, machine learning, and ethical AI, and work with educational institutions, government bodies, and scientific organizations to grow Philippine STEM talent.</p>
+    <p class="nonprofit">A non-stock, non-profit corporation registered with the Securities and Exchange Commission of the Philippines.</p>
+    <ul class="links">
+      <li><a href="https://ioaiph.org">ioaiph.org</a><small>IOAI Philippines, our national olympiad program</small></li>
+      <li><a href="mailto:info@aiosph.org">info@aiosph.org</a><small>Contact us</small></li>
+    </ul>
+  </main>
+  <footer>&copy; 2026 AI Olympiad Society Philippines, Inc.</footer>
+</body>
+</html>
