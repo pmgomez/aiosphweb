@@ -1,5 +1,9 @@
 {
   "name": "aiosphweb",
   "compatibility_date": "2026-09-01",
-  "assets": { "directory": "./public" }
+  "assets": { "directory": "./public" },
+  "routes": [
+    { "pattern": "aiosph.org", "custom_domain": true },
+    { "pattern": "www.aiosph.org", "custom_domain": true }
+  ]
 }
