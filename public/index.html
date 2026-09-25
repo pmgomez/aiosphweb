@@ -5,6 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AI Olympiad Society Philippines, Inc.</title>
 <meta name="description" content="AI Olympiad Society Philippines is a non-stock, non-profit organization that runs national AI competitions and fields Philippine delegations to the International Olympiad in Artificial Intelligence.">
+<script>
+  (function () {
+    try {
+      var stored = localStorage.getItem('theme');
+      if (stored === 'light' || stored === 'dark') {
+        document.documentElement.setAttribute('data-theme', stored);
+      }
+    } catch (e) {}
+  })();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -20,12 +30,18 @@
     --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
   }
   @media (prefers-color-scheme: dark) {
-    :root {
+    :root:not([data-theme="light"]) {
       --blue: #7FA6FF;
       --ink: #EEF2FA;
       --muted: #AEB8CC;
       --paper: #0E1830;
     }
+  }
+  :root[data-theme="dark"] {
+    --blue: #7FA6FF;
+    --ink: #EEF2FA;
+    --muted: #AEB8CC;
+    --paper: #0E1830;
   }
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
@@ -85,7 +101,29 @@
     text-underline-offset: 4px;
   }
   .links a:hover { text-decoration-color: var(--red); }
-  a:focus-visible { outline: 3px solid var(--sun); outline-offset: 3px; border-radius: 2px; }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--sun); outline-offset: 3px; border-radius: 2px; }
+  .theme-toggle {
+    position: fixed;
+    top: 1.25rem;
+    right: 1.25rem;
+    width: 2.25rem;
+    height: 2.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid color-mix(in srgb, var(--muted) 40%, transparent);
+    border-radius: 50%;
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    padding: 0;
+  }
+  .theme-toggle:hover { border-color: var(--muted); }
+  .theme-toggle svg { width: 1.1rem; height: 1.1rem; }
+  .theme-toggle .icon-sun { display: none; }
+  .theme-toggle .icon-moon { display: block; }
+  .theme-toggle.is-dark .icon-sun { display: block; }
+  .theme-toggle.is-dark .icon-moon { display: none; }
   .links small { display: block; color: var(--muted); font-size: 0.85rem; font-family: var(--font-mono); }
   footer {
     max-width: 44rem; width: 100%;
@@ -99,6 +137,10 @@
 </head>
 <body>
   <div class="flag" aria-hidden="true"><span></span><span></span></div>
+  <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to dark theme">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+  </button>
   <main>
     <div class="sun" aria-hidden="true"></div>
     <h1>AI Olympiad Society Philippines, Inc.</h1>
@@ -111,6 +153,37 @@
   </main>
   <footer>&copy; 2026 AI Olympiad Society Philippines, Inc.</footer>
   <script>
+    (function () {
+      var root = document.documentElement;
+      var toggle = document.getElementById('theme-toggle');
+      var mql = window.matchMedia('(prefers-color-scheme: dark)');
+
+      function currentTheme() {
+        var explicit = root.getAttribute('data-theme');
+        if (explicit === 'light' || explicit === 'dark') return explicit;
+        return mql.matches ? 'dark' : 'light';
+      }
+
+      function updateToggle() {
+        var theme = currentTheme();
+        toggle.classList.toggle('is-dark', theme === 'dark');
+        toggle.setAttribute('aria-label', theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
+      }
+
+      toggle.addEventListener('click', function () {
+        var next = currentTheme() === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        try { localStorage.setItem('theme', next); } catch (e) {}
+        updateToggle();
+      });
+
+      mql.addEventListener('change', function () {
+        if (!root.getAttribute('data-theme')) updateToggle();
+      });
+
+      updateToggle();
+    })();
+
     var sun = document.querySelector('.sun');
     var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (sun && !reduceMotion && matchMedia('(hover: hover)').matches) {
